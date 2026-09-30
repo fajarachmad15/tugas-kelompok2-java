@@ -15,7 +15,7 @@ Dibuat dari nol untuk memenuhi rubrik tugas: OOP (Sealed/Final class, inheritanc
 | **Eryka Octa** | Modul Penerbangan (Stream API & filter tiket) | `Flight.java`, `FlightReservation.java`, `FlightService.java` | `feature-flight` |
 | **Ananda Afriezta** | Modul Hotel (Filter lokasi & booking kamar) | `Hotel.java`, `HotelReservation.java`, `HotelService.java` | `feature-hotel` |
 | **Fadhil Fakhruddin** | Core OOP, Sealed Class, & Polimorfisme list pemesanan | `Reservation.java`, `CodeGenerator.java`, `ReservationNotFoundException.java`, `ReservationService.java` | `feature-core-oop` |
-| **Ridho** | Menu CLI utama & pembatalan via Pattern Matching | `Main.java` | `feature-app-driver` |
+| **Ridho Rahmawika** | Menu CLI utama & pembatalan via Pattern Matching | `Main.java` | `feature-app-driver` |
 | **Achmad Fajar** | Lead QA, testing konsol, diagram UML, & dokumen laporan | `README.md`, laporan final (.pdf) | `qa-and-docs` |
 
 ---
