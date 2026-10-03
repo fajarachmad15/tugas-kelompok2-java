@@ -17,7 +17,18 @@ public final class HotelReservation extends Reservation {
 
     @Override
     public void displayDetails() {
-        // TODO (Ananda): Tampilkan rincian reservasi hotel secara lengkap dan rapi
-        System.out.println("ID Konfirmasi: " + getConfirmationNumber() + " | Hotel: " + hotel.getName());
+        System.out.println("\n========================================");
+        System.out.println("       DETAIL RESERVASI HOTEL");
+        System.out.println("========================================");
+        System.out.println("ID Konfirmasi : " + getConfirmationNumber());
+        System.out.println("Nama Customer : " + getCustomerName());
+        System.out.println("Hotel         : " + hotel.getName());
+        System.out.println("Kota          : " + hotel.getCity());
+        System.out.println("Check-in      : " + checkInDate);
+        System.out.println("Check-out     : " + checkOutDate);
+        System.out.println("Jumlah Kamar  : " + roomCount);
+        System.out.printf("Harga/Malam   : Rp%,.2f%n", hotel.getPricePerNight());
+        System.out.printf("Total Harga   : Rp%,.2f%n", getTotalPrice());
+        System.out.println("========================================");
     }
 }
