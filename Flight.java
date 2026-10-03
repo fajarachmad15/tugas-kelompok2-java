@@ -21,7 +21,34 @@ public class Flight {
     public String getTravelDate() { return travelDate; }
     public double getPrice() { return price; }
     public int getAvailableSeats() { return availableSeats; }
-    public void setAvailableSeats(int availableSeats) { this.availableSeats = availableSeats; }
+    
+    /** Setter dengan validasi: jumlah kursi tidak boleh negatif. */
+    public void setAvailableSeats(int availableSeats) {
+        if (availableSeats < 0) {
+            throw new IllegalArgumentException("Jumlah kursi tidak boleh negatif.");
+        }
+        this.availableSeats = availableSeats;
+    }
+ 
+    /** True jika kursi yang tersisa cukup untuk jumlah penumpang tertentu. */
+    public boolean hasEnoughSeats(int passengers) {
+        return passengers > 0 && availableSeats >= passengers;
+    }
+ 
+    /** Potong kuota kursi saat pemesanan berhasil. */
+    public void reduceSeats(int passengers) {
+        if (!hasEnoughSeats(passengers)) {
+            throw new IllegalStateException("Kursi tidak mencukupi untuk penerbangan " + flightNumber);
+        }
+        availableSeats -= passengers;
+    }
+ 
+    /** Kembalikan kuota kursi (dipakai saat pembatalan reservasi). */
+    public void restoreSeats(int passengers) {
+        if (passengers > 0) {
+            availableSeats += passengers;
+        }
+    }
 
     @Override
     public String toString() {
