@@ -51,14 +51,40 @@ public class Main {
         }
     }
 
-    // TODO (Ridho): 
-    // 1. Cari objek reservasi berdasarkan input nomor konfirmasi.
-    // 2. Jika tidak ditemukan, throw ReservationNotFoundException.
-    // 3. Jika ditemukan, gunakan Pattern Matching (instanceof):
-    //    - if (res instanceof FlightReservation fr) -> kembalikan kuota kursi pesawat
-    //    - else if (res instanceof HotelReservation hr) -> kembalikan kuota kamar hotel
-    // 4. Hapus reservasi dari list dan tampilkan pesan sukses.
     private static void cancelReservation(Scanner scanner) {
-        System.out.println("\n[TODO Ridho] Fitur Batalkan Reservasi (Pattern Matching & Exception)");
+    System.out.print("Masukkan ID Konfirmasi: ");
+    String code = scanner.nextLine().trim();
+
+    try {
+        // Cari reservasi, throw ReservationNotFoundException kalau tidak ada
+        Reservation res = findReservation(code);
+
+        // Pattern matching: kembalikan kuota sesuai jenis reservasi
+        if (res instanceof FlightReservation fr) {
+            fr.getFlight().restoreSeats(fr.getPassengerCount());
+            System.out.println("Kursi penerbangan " + fr.getFlight().getFlightNumber()
+                    + " dikembalikan (" + fr.getPassengerCount() + " kursi).");
+        } else if (res instanceof HotelReservation hr) {
+            Hotel hotel = hr.getHotel();
+            hotel.setAvailableRooms(hotel.getAvailableRooms() + hr.getRoomCount());
+            System.out.println("Kamar " + hotel.getName()
+                    + " dikembalikan (" + hr.getRoomCount() + " kamar).");
+        }
+
+        // Hapus dari list
+        reservations.remove(res);
+        System.out.println("Reservasi " + code + " berhasil dibatalkan.");
+
+    } catch (ReservationNotFoundException e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+}
+
+    private static Reservation findReservation(String code) throws ReservationNotFoundException {
+        return reservations.stream()
+                .filter(r -> r.getConfirmationNumber().equalsIgnoreCase(code))
+                .findFirst()
+                .orElseThrow(() -> new ReservationNotFoundException(
+                        "Reservasi dengan ID " + code + " tidak ditemukan."));
     }
 }
